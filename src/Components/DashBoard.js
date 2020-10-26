@@ -65,6 +65,8 @@ class DashBoard extends Component {
                     onChiTietPhiChiDelete={this.props.onChiTietPhiChiDelete}
                     onDeletePhiChi={this.props.onDeletePhiChi}
                     onDeletePhiChiConfirm={this.props.onDeletePhiChiConfirm}
+                    tai_xe_select={this.props.tai_xe_select}
+                    onSearchClick={this.props.onSearchClick}
                 ></Screen_Phi_Chi>
             )
     }

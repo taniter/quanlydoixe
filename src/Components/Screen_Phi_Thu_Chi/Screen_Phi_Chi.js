@@ -8,17 +8,20 @@ class Screen_Phi_Chi extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAddChiPhi: true
+            isAddChiPhi: true,
+            // danh_sach_phi_chi: this.props.danh_sach_phi_chi
         }
     }
 
-    componentWillMount() {
-        if (this.props.danh_sach_phi_chi) {
-            this.setState({
-                danh_sach_phi_chi: this.props.danh_sach_phi_chi
-            })
-        }
-    }
+    // componentWillMount() {
+    //     if (this.props.danh_sach_phi_chi) {
+    //         this.setState({
+    //             danh_sach_phi_chi: this.props.danh_sach_phi_chi
+    //         }, ()=>{
+    //             this.render_item();
+    //         })
+    //     }
+    // }
 
     phi_chi_item_click = (data) => {
         this.setState({
@@ -27,9 +30,9 @@ class Screen_Phi_Chi extends Component {
         this.props.phi_chi_item_click(data);
     }
     render_item = () => {
-        if (this.state.danh_sach_phi_chi) {
+        if (this.props.danh_sach_phi_chi) {
             return (
-                this.state.danh_sach_phi_chi.map((value, key) => {
+                this.props.danh_sach_phi_chi.map((value, key) => {
                     return (
                         <Phi_Chi_Item
                             onDeletePhiChi={this.onDeletePhiChi}
@@ -57,48 +60,12 @@ class Screen_Phi_Chi extends Component {
     onDeleteConfirm = () => {
         this.props.onDeletePhiChiConfirm();
     }
+
     tai_xe_select = (data) => {
-        //Filter Khi Chọn Tài Xế Trong Phí Chi
-        const temp = [];
-        this.props.danh_sach_phi_chi.forEach((item) => {
-            if (item.val().Tai_Xe_ID === data)
-                temp.push(item);
-        })
-        this.setState({
-            danh_sach_phi_chi: temp
-        })
+        this.props.tai_xe_select(data);
     }
     onSearchClick = (data) => {
-        if (data && data.ngay_bat_dau && data.ngay_ket_thuc) {
-            const temp = [];
-            this.props.danh_sach_phi_chi.forEach((item) => {
-                if (item.val().Ngay_Chi >= data.ngay_bat_dau && item.val().Ngay_Chi <= data.ngay_ket_thuc)
-                    temp.push(item);
-            })
-            this.setState({
-                danh_sach_phi_chi: temp
-            })
-        }
-        if (data && data.ngay_bat_dau && !data.ngay_ket_thuc) {
-            const temp = [];
-            this.props.danh_sach_phi_chi.forEach((item) => {
-                if (item.val().Ngay_Chi === data.ngay_bat_dau)
-                    temp.push(item);
-            })
-            this.setState({
-                danh_sach_phi_chi: temp
-            })
-        }
-        if (data && !data.ngay_bat_dau && data.ngay_ket_thuc) {
-            const temp = [];
-            this.props.danh_sach_phi_chi.forEach((item) => {
-                if (item.val().Ngay_Chi === data.ngay_bat_dau)
-                    temp.push(item);
-            })
-            this.setState({
-                danh_sach_phi_chi: temp
-            })
-        }
+        this.props.onSearchClick(data);
     }
 
     render() {
@@ -150,6 +117,7 @@ class Screen_Phi_Chi extends Component {
                                 <th>Tài Xế</th>
                                 <th>Ngày Chi</th>
                                 <th>Người Chi</th>
+                                <th>Thao Tác</th>
                             </tr>
                         </thead>
                         <tbody>

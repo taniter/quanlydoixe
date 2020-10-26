@@ -5,7 +5,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      screen: 'chi_phi',
+      screen: 'dashboard',
       user: {
         name: 'Tân',
         curPhiChi: null
@@ -52,9 +52,9 @@ class App extends Component {
       value.forEach((item, key) => {
         temp3.push(item);
       })
-      console.log('1', temp3);
       this.setState({
-        danh_sach_phi_chi: temp3
+        danh_sach_phi_chi: temp3,
+        danh_sach_phi_chi_filter: temp3
       })
     })
     DM_TC_Phi_Chi_Chi_Tiet.on('value', (value) => {
@@ -243,8 +243,6 @@ class App extends Component {
     const flag = [];
     if (this.state.danh_sach_phi_chi.length) {
       this.state.danh_sach_phi_chi.forEach(item => {
-        console.log('item', item.val());
-        console.log('temp', temp);
         if (item.val().Auto_ID === temp.Auto_ID && item.val().Ngay_Chi === temp.Ngay_Chi) {
           flag.push(item.val());
         }
@@ -256,8 +254,6 @@ class App extends Component {
     else {
       DM_TC_Phi_Chi.push(temp);
     }
-
-    console.log('3', this.state.danh_sach_phi_chi);
     this.setState({
       curPhiChi: temp
     }, () => {
@@ -321,6 +317,51 @@ class App extends Component {
   }
 
 
+  tai_xe_select = (data) => {
+    //Filter Khi Chọn Tài Xế Trong Phí Chi
+    const temp = [];
+    this.state.danh_sach_phi_chi.forEach((item) => {
+      if (item.val().Tai_Xe_ID === data)
+        temp.push(item);
+    })
+    this.setState({
+      danh_sach_phi_chi_filter: temp
+    })
+  }
+  onSearchClick = (data) => {
+    if (data && data.ngay_bat_dau && data.ngay_ket_thuc) {
+      const temp = [];
+      this.state.danh_sach_phi_chi.forEach((item) => {
+        if (item.val().Ngay_Chi >= data.ngay_bat_dau && item.val().Ngay_Chi <= data.ngay_ket_thuc)
+          temp.push(item);
+      })
+      this.setState({
+        danh_sach_phi_chi_filter: temp
+      })
+    }
+    if (data && data.ngay_bat_dau && !data.ngay_ket_thuc) {
+      const temp = [];
+      this.state.danh_sach_phi_chi.forEach((item) => {
+        if (item.val().Ngay_Chi === data.ngay_bat_dau)
+          temp.push(item);
+      })
+      this.setState({
+        danh_sach_phi_chi_filter: temp
+      })
+    }
+    if (data && !data.ngay_bat_dau && data.ngay_ket_thuc) {
+      const temp = [];
+      this.state.danh_sach_phi_chi.forEach((item) => {
+        if (item.val().Ngay_Chi === data.ngay_bat_dau)
+          temp.push(item);
+      })
+      this.setState({
+        danh_sach_phi_chi_filter: temp
+      })
+    }
+  }
+
+
   render_Dashboard = () => {
     return (
       <DashBoard
@@ -343,7 +384,7 @@ class App extends Component {
         editChiPhi={this.editChiPhi}
         addNewChiPhi={this.addNewChiPhi}
         deleteChiPhi={this.deleteChiPhi}
-        danh_sach_phi_chi={this.state.danh_sach_phi_chi}
+        danh_sach_phi_chi={this.state.danh_sach_phi_chi_filter}
         addNewPhiChi={this.addNewPhiChi}
         onAddChiTietPhiChi={this.onAddChiTietPhiChi}
         danh_sach_chi_tiet_phi_chi_key={this.state.danh_sach_chi_tiet_phi_chi_key}
@@ -351,6 +392,8 @@ class App extends Component {
         onChiTietPhiChiDelete={this.onChiTietPhiChiDelete}
         onDeletePhiChi={this.onDeletePhiChi}
         onDeletePhiChiConfirm={this.onDeletePhiChiConfirm}
+        tai_xe_select={this.tai_xe_select}
+        onSearchClick={this.onSearchClick}
       ></DashBoard>
     )
   }
