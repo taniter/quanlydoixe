@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/quanlydoixe/precache-manifest.f3488395dfe2e29896104f6a4264d2af.js"
+  "/quanlydoixe/precache-manifest.f8d92463c9c5bad88b893e6cc8ffe659.js"
 );
 
 self.addEventListener('message', (event) => {

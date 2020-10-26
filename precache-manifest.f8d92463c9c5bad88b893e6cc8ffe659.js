@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4f2b174af36685f985aa4c19d323058b",
+    "revision": "694a7a368dc335e791192c277312aadb",
     "url": "/quanlydoixe/index.html"
   },
   {
-    "revision": "571986fae189b11ba418",
-    "url": "/quanlydoixe/static/css/main.74da0a30.chunk.css"
+    "revision": "ff8c74b5256c1cfcf108",
+    "url": "/quanlydoixe/static/css/main.36346c87.chunk.css"
   },
   {
     "revision": "46f8b696f9084dac7391",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/quanlydoixe/static/js/2.9b1658b8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "571986fae189b11ba418",
-    "url": "/quanlydoixe/static/js/main.5e3ee185.chunk.js"
+    "revision": "ff8c74b5256c1cfcf108",
+    "url": "/quanlydoixe/static/js/main.cd20f2e9.chunk.js"
   },
   {
     "revision": "d1eb8ff758c42ed9114e",
